@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5d8925e686434b458024d845d373966b" Name="Diagram1">
+        <EntityTypeShape EntityType="AbdeevMarksStudentsModel.DEPARTMENT" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbdeevMarksStudentsModel.DISCIPLINES" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbdeevMarksStudentsModel.DISCIPLINES_TEACHERS" Width="1.5" PointX="9.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbdeevMarksStudentsModel.FACULTY" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbdeevMarksStudentsModel.GROUP" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbdeevMarksStudentsModel.STATEMENT_MARKS" Width="1.5" PointX="12" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbdeevMarksStudentsModel.STATEMENT_SESSION" Width="1.5" PointX="15" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbdeevMarksStudentsModel.STUDENTS" Width="1.5" PointX="9.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbdeevMarksStudentsModel.TEACHER" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK__DEPARTMEN__FACUL__02084FDA" ManuallyRouted="false" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK__DEPARTMEN__TEACH__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK__DISCIPLIN__DEPAR__2A164134" ManuallyRouted="false" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK_GROUP_DEPARTMENT" ManuallyRouted="false" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK_DISCIPLINES_TEACHERS_DISCIPLINES" ManuallyRouted="false" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK_DISCIPLINES_TEACHERS_DISCIPLINES_TEACHERS" ManuallyRouted="false" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK_STATEMENT_MARKS_DISCIPLINES_TEACHERS" ManuallyRouted="false" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK_STATEMENT_SESSION_DISCIPLINES_TEACHERS" ManuallyRouted="false" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK__FACULTY__TEACHER__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK_GROUP_TEACHER" ManuallyRouted="false" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK_STUDENTS_GROUP" ManuallyRouted="false" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK_STATEMENT_MARKS_STUDENTS" ManuallyRouted="false" />
+        <AssociationConnector Association="AbdeevMarksStudentsModel.FK_STATEMENT_SESSION_STUDENTS" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,812 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище AbdeevMarksStudentsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DEPARTMENT">
+          <Key>
+            <PropertyRef Name="DEPARTMENT_ID" />
+          </Key>
+          <Property Name="DEPARTMENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FACULTY_ID" Type="int" Nullable="false" />
+          <Property Name="DEPARTMENT_NAME" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="TEACHER_ID" Type="int" Nullable="false" />
+          <Property Name="DEPARTMENT_OFFICE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DEPARTMENT_BUILDING" Type="int" Nullable="false" />
+          <Property Name="DEPARTMENT_PHONE" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DISCIPLINES">
+          <Key>
+            <PropertyRef Name="DISCIPLINES_ID" />
+          </Key>
+          <Property Name="DISCIPLINES_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DEPARTMENT_ID" Type="int" Nullable="false" />
+          <Property Name="DISCIPLINES_NAME" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DISCIPLINES_TEACHERS">
+          <Key>
+            <PropertyRef Name="DISCIPLINES_TEACHER_ID" />
+          </Key>
+          <Property Name="DISCIPLINES_TEACHER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DISCIPLINES_ID" Type="int" Nullable="false" />
+          <Property Name="TEACHER_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACULTY">
+          <Key>
+            <PropertyRef Name="FACULTY_ID" />
+          </Key>
+          <Property Name="FACULTY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FACULTY_NAME" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="TEACHER_ID" Type="int" Nullable="false" />
+          <Property Name="FACULTY_OFFICE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FACULTY_BUILDING" Type="int" Nullable="false" />
+          <Property Name="FACULTY_PHONE" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GROUP">
+          <Key>
+            <PropertyRef Name="GROUP_ID" />
+          </Key>
+          <Property Name="GROUP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DEPARTMENT_ID" Type="int" Nullable="false" />
+          <Property Name="GROUP_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TEACHER_ID" Type="int" Nullable="false" />
+          <Property Name="GROUP_YEAR" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STATEMENT_MARKS">
+          <Key>
+            <PropertyRef Name="STATEMENT_MARKS_RECORD_ID" />
+          </Key>
+          <Property Name="STATEMENT_MARKS_RECORD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STUDENT_ID" Type="int" Nullable="false" />
+          <Property Name="DISCIPLINES_TEACHER_ID" Type="int" Nullable="false" />
+          <Property Name="STATEMENT_MARKS_MARK" Type="int" Nullable="false" />
+          <Property Name="STATEMENT_MARKS_DATE" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STATEMENT_SESSION">
+          <Key>
+            <PropertyRef Name="STATEMENT_SESSION_RECORD_ID" />
+          </Key>
+          <Property Name="STATEMENT_SESSION_RECORD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STUDENT_ID" Type="int" Nullable="false" />
+          <Property Name="DISCIPLINES_TEACHER_ID" Type="int" Nullable="false" />
+          <Property Name="STATEMENT_SESSION_SEMESTER" Type="int" Nullable="false" />
+          <Property Name="STATEMENT_SESSION_TYPE_TEST" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="STATEMENT_SESSION_MARK" Type="int" Nullable="false" />
+          <Property Name="STATEMENT_SESSION_DATE" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STUDENTS">
+          <Key>
+            <PropertyRef Name="STUDENT_ID" />
+          </Key>
+          <Property Name="STUDENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GROUP_ID" Type="int" Nullable="false" />
+          <Property Name="STUDENT_SURNAME" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="STUDENT_NAME" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="STUDENT_PATRONYMIC" Type="varchar" MaxLength="200" />
+          <Property Name="STUDENT_BIRTHDAY" Type="date" Nullable="false" />
+          <Property Name="STUDENT_GENDER" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="STUDENT_ADDRESS" Type="varchar(max)" Nullable="false" />
+          <Property Name="STUDENT_PHONE" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="STUDENT_PHOTO" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TEACHER">
+          <Key>
+            <PropertyRef Name="TEACHER_ID" />
+          </Key>
+          <Property Name="TEACHER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TEACHER_SURNAME" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="TEACHER_NAME" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="TEACHER_PATRONYMIC" Type="varchar" MaxLength="200" />
+          <Property Name="TEACHER_BIRTHDAY" Type="date" Nullable="false" />
+          <Property Name="TEACHER_GENDER" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="TEACHER_ADDRESS" Type="varchar(max)" Nullable="false" />
+          <Property Name="TEACHER_PHONE" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__DEPARTMEN__FACUL__02084FDA">
+          <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="1" />
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACULTY">
+              <PropertyRef Name="FACULTY_ID" />
+            </Principal>
+            <Dependent Role="DEPARTMENT">
+              <PropertyRef Name="FACULTY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DEPARTMEN__TEACH__02FC7413">
+          <End Role="TEACHER" Type="Self.TEACHER" Multiplicity="1" />
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEACHER">
+              <PropertyRef Name="TEACHER_ID" />
+            </Principal>
+            <Dependent Role="DEPARTMENT">
+              <PropertyRef Name="TEACHER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DISCIPLIN__DEPAR__2A164134">
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="1" />
+          <End Role="DISCIPLINES" Type="Self.DISCIPLINES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPARTMENT_ID" />
+            </Principal>
+            <Dependent Role="DISCIPLINES">
+              <PropertyRef Name="DEPARTMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FACULTY__TEACHER__7C4F7684">
+          <End Role="TEACHER" Type="Self.TEACHER" Multiplicity="1" />
+          <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEACHER">
+              <PropertyRef Name="TEACHER_ID" />
+            </Principal>
+            <Dependent Role="FACULTY">
+              <PropertyRef Name="TEACHER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DISCIPLINES_TEACHERS_DISCIPLINES">
+          <End Role="DISCIPLINES" Type="Self.DISCIPLINES" Multiplicity="1" />
+          <End Role="DISCIPLINES_TEACHERS" Type="Self.DISCIPLINES_TEACHERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCIPLINES">
+              <PropertyRef Name="DISCIPLINES_ID" />
+            </Principal>
+            <Dependent Role="DISCIPLINES_TEACHERS">
+              <PropertyRef Name="DISCIPLINES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DISCIPLINES_TEACHERS_DISCIPLINES_TEACHERS">
+          <End Role="TEACHER" Type="Self.TEACHER" Multiplicity="1" />
+          <End Role="DISCIPLINES_TEACHERS" Type="Self.DISCIPLINES_TEACHERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEACHER">
+              <PropertyRef Name="TEACHER_ID" />
+            </Principal>
+            <Dependent Role="DISCIPLINES_TEACHERS">
+              <PropertyRef Name="TEACHER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GROUP_DEPARTMENT">
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="1" />
+          <End Role="GROUP" Type="Self.GROUP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPARTMENT_ID" />
+            </Principal>
+            <Dependent Role="GROUP">
+              <PropertyRef Name="DEPARTMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GROUP_TEACHER">
+          <End Role="TEACHER" Type="Self.TEACHER" Multiplicity="1" />
+          <End Role="GROUP" Type="Self.GROUP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEACHER">
+              <PropertyRef Name="TEACHER_ID" />
+            </Principal>
+            <Dependent Role="GROUP">
+              <PropertyRef Name="TEACHER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATEMENT_MARKS_DISCIPLINES_TEACHERS">
+          <End Role="DISCIPLINES_TEACHERS" Type="Self.DISCIPLINES_TEACHERS" Multiplicity="1" />
+          <End Role="STATEMENT_MARKS" Type="Self.STATEMENT_MARKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCIPLINES_TEACHERS">
+              <PropertyRef Name="DISCIPLINES_TEACHER_ID" />
+            </Principal>
+            <Dependent Role="STATEMENT_MARKS">
+              <PropertyRef Name="DISCIPLINES_TEACHER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATEMENT_MARKS_STUDENTS">
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="1" />
+          <End Role="STATEMENT_MARKS" Type="Self.STATEMENT_MARKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTS">
+              <PropertyRef Name="STUDENT_ID" />
+            </Principal>
+            <Dependent Role="STATEMENT_MARKS">
+              <PropertyRef Name="STUDENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATEMENT_SESSION_DISCIPLINES_TEACHERS">
+          <End Role="DISCIPLINES_TEACHERS" Type="Self.DISCIPLINES_TEACHERS" Multiplicity="1" />
+          <End Role="STATEMENT_SESSION" Type="Self.STATEMENT_SESSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCIPLINES_TEACHERS">
+              <PropertyRef Name="DISCIPLINES_TEACHER_ID" />
+            </Principal>
+            <Dependent Role="STATEMENT_SESSION">
+              <PropertyRef Name="DISCIPLINES_TEACHER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATEMENT_SESSION_STUDENTS">
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="1" />
+          <End Role="STATEMENT_SESSION" Type="Self.STATEMENT_SESSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTS">
+              <PropertyRef Name="STUDENT_ID" />
+            </Principal>
+            <Dependent Role="STATEMENT_SESSION">
+              <PropertyRef Name="STUDENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENTS_GROUP">
+          <End Role="GROUP" Type="Self.GROUP" Multiplicity="1" />
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GROUP">
+              <PropertyRef Name="GROUP_ID" />
+            </Principal>
+            <Dependent Role="STUDENTS">
+              <PropertyRef Name="GROUP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AbdeevMarksStudentsModelContainer">
+          <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DISCIPLINES" EntityType="Self.DISCIPLINES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DISCIPLINES_TEACHERS" EntityType="Self.DISCIPLINES_TEACHERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FACULTY" EntityType="Self.FACULTY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GROUP" EntityType="Self.GROUP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATEMENT_MARKS" EntityType="Self.STATEMENT_MARKS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATEMENT_SESSION" EntityType="Self.STATEMENT_SESSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STUDENTS" EntityType="Self.STUDENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEACHER" EntityType="Self.TEACHER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DEPARTMEN__FACUL__02084FDA" Association="Self.FK__DEPARTMEN__FACUL__02084FDA">
+            <End Role="FACULTY" EntitySet="FACULTY" />
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DEPARTMEN__TEACH__02FC7413" Association="Self.FK__DEPARTMEN__TEACH__02FC7413">
+            <End Role="TEACHER" EntitySet="TEACHER" />
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DISCIPLIN__DEPAR__2A164134" Association="Self.FK__DISCIPLIN__DEPAR__2A164134">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+            <End Role="DISCIPLINES" EntitySet="DISCIPLINES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FACULTY__TEACHER__7C4F7684" Association="Self.FK__FACULTY__TEACHER__7C4F7684">
+            <End Role="TEACHER" EntitySet="TEACHER" />
+            <End Role="FACULTY" EntitySet="FACULTY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISCIPLINES_TEACHERS_DISCIPLINES" Association="Self.FK_DISCIPLINES_TEACHERS_DISCIPLINES">
+            <End Role="DISCIPLINES" EntitySet="DISCIPLINES" />
+            <End Role="DISCIPLINES_TEACHERS" EntitySet="DISCIPLINES_TEACHERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISCIPLINES_TEACHERS_DISCIPLINES_TEACHERS" Association="Self.FK_DISCIPLINES_TEACHERS_DISCIPLINES_TEACHERS">
+            <End Role="TEACHER" EntitySet="TEACHER" />
+            <End Role="DISCIPLINES_TEACHERS" EntitySet="DISCIPLINES_TEACHERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GROUP_DEPARTMENT" Association="Self.FK_GROUP_DEPARTMENT">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+            <End Role="GROUP" EntitySet="GROUP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GROUP_TEACHER" Association="Self.FK_GROUP_TEACHER">
+            <End Role="TEACHER" EntitySet="TEACHER" />
+            <End Role="GROUP" EntitySet="GROUP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATEMENT_MARKS_DISCIPLINES_TEACHERS" Association="Self.FK_STATEMENT_MARKS_DISCIPLINES_TEACHERS">
+            <End Role="DISCIPLINES_TEACHERS" EntitySet="DISCIPLINES_TEACHERS" />
+            <End Role="STATEMENT_MARKS" EntitySet="STATEMENT_MARKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATEMENT_MARKS_STUDENTS" Association="Self.FK_STATEMENT_MARKS_STUDENTS">
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+            <End Role="STATEMENT_MARKS" EntitySet="STATEMENT_MARKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATEMENT_SESSION_DISCIPLINES_TEACHERS" Association="Self.FK_STATEMENT_SESSION_DISCIPLINES_TEACHERS">
+            <End Role="DISCIPLINES_TEACHERS" EntitySet="DISCIPLINES_TEACHERS" />
+            <End Role="STATEMENT_SESSION" EntitySet="STATEMENT_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATEMENT_SESSION_STUDENTS" Association="Self.FK_STATEMENT_SESSION_STUDENTS">
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+            <End Role="STATEMENT_SESSION" EntitySet="STATEMENT_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENTS_GROUP" Association="Self.FK_STUDENTS_GROUP">
+            <End Role="GROUP" EntitySet="GROUP" />
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AbdeevMarksStudentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DEPARTMENT">
+          <Key>
+            <PropertyRef Name="DEPARTMENT_ID" />
+          </Key>
+          <Property Name="DEPARTMENT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FACULTY_ID" Type="Int32" Nullable="false" />
+          <Property Name="DEPARTMENT_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TEACHER_ID" Type="Int32" Nullable="false" />
+          <Property Name="DEPARTMENT_OFFICE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DEPARTMENT_BUILDING" Type="Int32" Nullable="false" />
+          <Property Name="DEPARTMENT_PHONE" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FACULTY" Relationship="Self.FK__DEPARTMEN__FACUL__02084FDA" FromRole="DEPARTMENT" ToRole="FACULTY" />
+          <NavigationProperty Name="TEACHER" Relationship="Self.FK__DEPARTMEN__TEACH__02FC7413" FromRole="DEPARTMENT" ToRole="TEACHER" />
+          <NavigationProperty Name="DISCIPLINES" Relationship="Self.FK__DISCIPLIN__DEPAR__2A164134" FromRole="DEPARTMENT" ToRole="DISCIPLINES" />
+          <NavigationProperty Name="GROUP" Relationship="Self.FK_GROUP_DEPARTMENT" FromRole="DEPARTMENT" ToRole="GROUP" />
+        </EntityType>
+        <EntityType Name="DISCIPLINES">
+          <Key>
+            <PropertyRef Name="DISCIPLINES_ID" />
+          </Key>
+          <Property Name="DISCIPLINES_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DEPARTMENT_ID" Type="Int32" Nullable="false" />
+          <Property Name="DISCIPLINES_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK__DISCIPLIN__DEPAR__2A164134" FromRole="DISCIPLINES" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="DISCIPLINES_TEACHERS" Relationship="Self.FK_DISCIPLINES_TEACHERS_DISCIPLINES" FromRole="DISCIPLINES" ToRole="DISCIPLINES_TEACHERS" />
+        </EntityType>
+        <EntityType Name="DISCIPLINES_TEACHERS">
+          <Key>
+            <PropertyRef Name="DISCIPLINES_TEACHER_ID" />
+          </Key>
+          <Property Name="DISCIPLINES_TEACHER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DISCIPLINES_ID" Type="Int32" Nullable="false" />
+          <Property Name="TEACHER_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DISCIPLINES" Relationship="Self.FK_DISCIPLINES_TEACHERS_DISCIPLINES" FromRole="DISCIPLINES_TEACHERS" ToRole="DISCIPLINES" />
+          <NavigationProperty Name="TEACHER" Relationship="Self.FK_DISCIPLINES_TEACHERS_DISCIPLINES_TEACHERS" FromRole="DISCIPLINES_TEACHERS" ToRole="TEACHER" />
+          <NavigationProperty Name="STATEMENT_MARKS" Relationship="Self.FK_STATEMENT_MARKS_DISCIPLINES_TEACHERS" FromRole="DISCIPLINES_TEACHERS" ToRole="STATEMENT_MARKS" />
+          <NavigationProperty Name="STATEMENT_SESSION" Relationship="Self.FK_STATEMENT_SESSION_DISCIPLINES_TEACHERS" FromRole="DISCIPLINES_TEACHERS" ToRole="STATEMENT_SESSION" />
+        </EntityType>
+        <EntityType Name="FACULTY">
+          <Key>
+            <PropertyRef Name="FACULTY_ID" />
+          </Key>
+          <Property Name="FACULTY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FACULTY_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TEACHER_ID" Type="Int32" Nullable="false" />
+          <Property Name="FACULTY_OFFICE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FACULTY_BUILDING" Type="Int32" Nullable="false" />
+          <Property Name="FACULTY_PHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK__DEPARTMEN__FACUL__02084FDA" FromRole="FACULTY" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="TEACHER" Relationship="Self.FK__FACULTY__TEACHER__7C4F7684" FromRole="FACULTY" ToRole="TEACHER" />
+        </EntityType>
+        <EntityType Name="GROUP">
+          <Key>
+            <PropertyRef Name="GROUP_ID" />
+          </Key>
+          <Property Name="GROUP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DEPARTMENT_ID" Type="Int32" Nullable="false" />
+          <Property Name="GROUP_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TEACHER_ID" Type="Int32" Nullable="false" />
+          <Property Name="GROUP_YEAR" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK_GROUP_DEPARTMENT" FromRole="GROUP" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="TEACHER" Relationship="Self.FK_GROUP_TEACHER" FromRole="GROUP" ToRole="TEACHER" />
+          <NavigationProperty Name="STUDENTS" Relationship="Self.FK_STUDENTS_GROUP" FromRole="GROUP" ToRole="STUDENTS" />
+        </EntityType>
+        <EntityType Name="STATEMENT_MARKS">
+          <Key>
+            <PropertyRef Name="STATEMENT_MARKS_RECORD_ID" />
+          </Key>
+          <Property Name="STATEMENT_MARKS_RECORD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STUDENT_ID" Type="Int32" Nullable="false" />
+          <Property Name="DISCIPLINES_TEACHER_ID" Type="Int32" Nullable="false" />
+          <Property Name="STATEMENT_MARKS_MARK" Type="Int32" Nullable="false" />
+          <Property Name="STATEMENT_MARKS_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="DISCIPLINES_TEACHERS" Relationship="Self.FK_STATEMENT_MARKS_DISCIPLINES_TEACHERS" FromRole="STATEMENT_MARKS" ToRole="DISCIPLINES_TEACHERS" />
+          <NavigationProperty Name="STUDENTS" Relationship="Self.FK_STATEMENT_MARKS_STUDENTS" FromRole="STATEMENT_MARKS" ToRole="STUDENTS" />
+        </EntityType>
+        <EntityType Name="STATEMENT_SESSION">
+          <Key>
+            <PropertyRef Name="STATEMENT_SESSION_RECORD_ID" />
+          </Key>
+          <Property Name="STATEMENT_SESSION_RECORD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STUDENT_ID" Type="Int32" Nullable="false" />
+          <Property Name="DISCIPLINES_TEACHER_ID" Type="Int32" Nullable="false" />
+          <Property Name="STATEMENT_SESSION_SEMESTER" Type="Int32" Nullable="false" />
+          <Property Name="STATEMENT_SESSION_TYPE_TEST" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STATEMENT_SESSION_MARK" Type="Int32" Nullable="false" />
+          <Property Name="STATEMENT_SESSION_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="DISCIPLINES_TEACHERS" Relationship="Self.FK_STATEMENT_SESSION_DISCIPLINES_TEACHERS" FromRole="STATEMENT_SESSION" ToRole="DISCIPLINES_TEACHERS" />
+          <NavigationProperty Name="STUDENTS" Relationship="Self.FK_STATEMENT_SESSION_STUDENTS" FromRole="STATEMENT_SESSION" ToRole="STUDENTS" />
+        </EntityType>
+        <EntityType Name="STUDENTS">
+          <Key>
+            <PropertyRef Name="STUDENT_ID" />
+          </Key>
+          <Property Name="STUDENT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GROUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="STUDENT_SURNAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STUDENT_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STUDENT_PATRONYMIC" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="STUDENT_BIRTHDAY" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="STUDENT_GENDER" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="STUDENT_ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STUDENT_PHONE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STUDENT_PHOTO" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GROUP" Relationship="Self.FK_STUDENTS_GROUP" FromRole="STUDENTS" ToRole="GROUP" />
+          <NavigationProperty Name="STATEMENT_MARKS" Relationship="Self.FK_STATEMENT_MARKS_STUDENTS" FromRole="STUDENTS" ToRole="STATEMENT_MARKS" />
+          <NavigationProperty Name="STATEMENT_SESSION" Relationship="Self.FK_STATEMENT_SESSION_STUDENTS" FromRole="STUDENTS" ToRole="STATEMENT_SESSION" />
+        </EntityType>
+        <EntityType Name="TEACHER">
+          <Key>
+            <PropertyRef Name="TEACHER_ID" />
+          </Key>
+          <Property Name="TEACHER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TEACHER_SURNAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TEACHER_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TEACHER_PATRONYMIC" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TEACHER_BIRTHDAY" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TEACHER_GENDER" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TEACHER_ADDRESS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TEACHER_PHONE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK__DEPARTMEN__TEACH__02FC7413" FromRole="TEACHER" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="DISCIPLINES_TEACHERS" Relationship="Self.FK_DISCIPLINES_TEACHERS_DISCIPLINES_TEACHERS" FromRole="TEACHER" ToRole="DISCIPLINES_TEACHERS" />
+          <NavigationProperty Name="FACULTY" Relationship="Self.FK__FACULTY__TEACHER__7C4F7684" FromRole="TEACHER" ToRole="FACULTY" />
+          <NavigationProperty Name="GROUP" Relationship="Self.FK_GROUP_TEACHER" FromRole="TEACHER" ToRole="GROUP" />
+        </EntityType>
+        <Association Name="FK__DEPARTMEN__FACUL__02084FDA">
+          <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="1" />
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACULTY">
+              <PropertyRef Name="FACULTY_ID" />
+            </Principal>
+            <Dependent Role="DEPARTMENT">
+              <PropertyRef Name="FACULTY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DEPARTMEN__TEACH__02FC7413">
+          <End Role="TEACHER" Type="Self.TEACHER" Multiplicity="1" />
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEACHER">
+              <PropertyRef Name="TEACHER_ID" />
+            </Principal>
+            <Dependent Role="DEPARTMENT">
+              <PropertyRef Name="TEACHER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DISCIPLIN__DEPAR__2A164134">
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="1" />
+          <End Role="DISCIPLINES" Type="Self.DISCIPLINES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPARTMENT_ID" />
+            </Principal>
+            <Dependent Role="DISCIPLINES">
+              <PropertyRef Name="DEPARTMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GROUP_DEPARTMENT">
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="1" />
+          <End Role="GROUP" Type="Self.GROUP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPARTMENT_ID" />
+            </Principal>
+            <Dependent Role="GROUP">
+              <PropertyRef Name="DEPARTMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DISCIPLINES_TEACHERS_DISCIPLINES">
+          <End Role="DISCIPLINES" Type="Self.DISCIPLINES" Multiplicity="1" />
+          <End Role="DISCIPLINES_TEACHERS" Type="Self.DISCIPLINES_TEACHERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCIPLINES">
+              <PropertyRef Name="DISCIPLINES_ID" />
+            </Principal>
+            <Dependent Role="DISCIPLINES_TEACHERS">
+              <PropertyRef Name="DISCIPLINES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DISCIPLINES_TEACHERS_DISCIPLINES_TEACHERS">
+          <End Role="TEACHER" Type="Self.TEACHER" Multiplicity="1" />
+          <End Role="DISCIPLINES_TEACHERS" Type="Self.DISCIPLINES_TEACHERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEACHER">
+              <PropertyRef Name="TEACHER_ID" />
+            </Principal>
+            <Dependent Role="DISCIPLINES_TEACHERS">
+              <PropertyRef Name="TEACHER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATEMENT_MARKS_DISCIPLINES_TEACHERS">
+          <End Role="DISCIPLINES_TEACHERS" Type="Self.DISCIPLINES_TEACHERS" Multiplicity="1" />
+          <End Role="STATEMENT_MARKS" Type="Self.STATEMENT_MARKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCIPLINES_TEACHERS">
+              <PropertyRef Name="DISCIPLINES_TEACHER_ID" />
+            </Principal>
+            <Dependent Role="STATEMENT_MARKS">
+              <PropertyRef Name="DISCIPLINES_TEACHER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATEMENT_SESSION_DISCIPLINES_TEACHERS">
+          <End Role="DISCIPLINES_TEACHERS" Type="Self.DISCIPLINES_TEACHERS" Multiplicity="1" />
+          <End Role="STATEMENT_SESSION" Type="Self.STATEMENT_SESSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCIPLINES_TEACHERS">
+              <PropertyRef Name="DISCIPLINES_TEACHER_ID" />
+            </Principal>
+            <Dependent Role="STATEMENT_SESSION">
+              <PropertyRef Name="DISCIPLINES_TEACHER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FACULTY__TEACHER__7C4F7684">
+          <End Role="TEACHER" Type="Self.TEACHER" Multiplicity="1" />
+          <End Role="FACULTY" Type="Self.FACULTY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEACHER">
+              <PropertyRef Name="TEACHER_ID" />
+            </Principal>
+            <Dependent Role="FACULTY">
+              <PropertyRef Name="TEACHER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GROUP_TEACHER">
+          <End Role="TEACHER" Type="Self.TEACHER" Multiplicity="1" />
+          <End Role="GROUP" Type="Self.GROUP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEACHER">
+              <PropertyRef Name="TEACHER_ID" />
+            </Principal>
+            <Dependent Role="GROUP">
+              <PropertyRef Name="TEACHER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENTS_GROUP">
+          <End Role="GROUP" Type="Self.GROUP" Multiplicity="1" />
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GROUP">
+              <PropertyRef Name="GROUP_ID" />
+            </Principal>
+            <Dependent Role="STUDENTS">
+              <PropertyRef Name="GROUP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATEMENT_MARKS_STUDENTS">
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="1" />
+          <End Role="STATEMENT_MARKS" Type="Self.STATEMENT_MARKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTS">
+              <PropertyRef Name="STUDENT_ID" />
+            </Principal>
+            <Dependent Role="STATEMENT_MARKS">
+              <PropertyRef Name="STUDENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATEMENT_SESSION_STUDENTS">
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="1" />
+          <End Role="STATEMENT_SESSION" Type="Self.STATEMENT_SESSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTS">
+              <PropertyRef Name="STUDENT_ID" />
+            </Principal>
+            <Dependent Role="STATEMENT_SESSION">
+              <PropertyRef Name="STUDENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AbdeevMarksStudentsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" />
+          <EntitySet Name="DISCIPLINES" EntityType="Self.DISCIPLINES" />
+          <EntitySet Name="DISCIPLINES_TEACHERS" EntityType="Self.DISCIPLINES_TEACHERS" />
+          <EntitySet Name="FACULTY" EntityType="Self.FACULTY" />
+          <EntitySet Name="GROUP" EntityType="Self.GROUP" />
+          <EntitySet Name="STATEMENT_MARKS" EntityType="Self.STATEMENT_MARKS" />
+          <EntitySet Name="STATEMENT_SESSION" EntityType="Self.STATEMENT_SESSION" />
+          <EntitySet Name="STUDENTS" EntityType="Self.STUDENTS" />
+          <EntitySet Name="TEACHER" EntityType="Self.TEACHER" />
+          <AssociationSet Name="FK__DEPARTMEN__FACUL__02084FDA" Association="Self.FK__DEPARTMEN__FACUL__02084FDA">
+            <End Role="FACULTY" EntitySet="FACULTY" />
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DEPARTMEN__TEACH__02FC7413" Association="Self.FK__DEPARTMEN__TEACH__02FC7413">
+            <End Role="TEACHER" EntitySet="TEACHER" />
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DISCIPLIN__DEPAR__2A164134" Association="Self.FK__DISCIPLIN__DEPAR__2A164134">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+            <End Role="DISCIPLINES" EntitySet="DISCIPLINES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GROUP_DEPARTMENT" Association="Self.FK_GROUP_DEPARTMENT">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+            <End Role="GROUP" EntitySet="GROUP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISCIPLINES_TEACHERS_DISCIPLINES" Association="Self.FK_DISCIPLINES_TEACHERS_DISCIPLINES">
+            <End Role="DISCIPLINES" EntitySet="DISCIPLINES" />
+            <End Role="DISCIPLINES_TEACHERS" EntitySet="DISCIPLINES_TEACHERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISCIPLINES_TEACHERS_DISCIPLINES_TEACHERS" Association="Self.FK_DISCIPLINES_TEACHERS_DISCIPLINES_TEACHERS">
+            <End Role="TEACHER" EntitySet="TEACHER" />
+            <End Role="DISCIPLINES_TEACHERS" EntitySet="DISCIPLINES_TEACHERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATEMENT_MARKS_DISCIPLINES_TEACHERS" Association="Self.FK_STATEMENT_MARKS_DISCIPLINES_TEACHERS">
+            <End Role="DISCIPLINES_TEACHERS" EntitySet="DISCIPLINES_TEACHERS" />
+            <End Role="STATEMENT_MARKS" EntitySet="STATEMENT_MARKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATEMENT_SESSION_DISCIPLINES_TEACHERS" Association="Self.FK_STATEMENT_SESSION_DISCIPLINES_TEACHERS">
+            <End Role="DISCIPLINES_TEACHERS" EntitySet="DISCIPLINES_TEACHERS" />
+            <End Role="STATEMENT_SESSION" EntitySet="STATEMENT_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FACULTY__TEACHER__7C4F7684" Association="Self.FK__FACULTY__TEACHER__7C4F7684">
+            <End Role="TEACHER" EntitySet="TEACHER" />
+            <End Role="FACULTY" EntitySet="FACULTY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GROUP_TEACHER" Association="Self.FK_GROUP_TEACHER">
+            <End Role="TEACHER" EntitySet="TEACHER" />
+            <End Role="GROUP" EntitySet="GROUP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENTS_GROUP" Association="Self.FK_STUDENTS_GROUP">
+            <End Role="GROUP" EntitySet="GROUP" />
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATEMENT_MARKS_STUDENTS" Association="Self.FK_STATEMENT_MARKS_STUDENTS">
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+            <End Role="STATEMENT_MARKS" EntitySet="STATEMENT_MARKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATEMENT_SESSION_STUDENTS" Association="Self.FK_STATEMENT_SESSION_STUDENTS">
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+            <End Role="STATEMENT_SESSION" EntitySet="STATEMENT_SESSION" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AbdeevMarksStudentsModelContainer" CdmEntityContainer="AbdeevMarksStudentsEntities">
+          <EntitySetMapping Name="DEPARTMENT">
+            <EntityTypeMapping TypeName="AbdeevMarksStudentsModel.DEPARTMENT">
+              <MappingFragment StoreEntitySet="DEPARTMENT">
+                <ScalarProperty Name="DEPARTMENT_ID" ColumnName="DEPARTMENT_ID" />
+                <ScalarProperty Name="FACULTY_ID" ColumnName="FACULTY_ID" />
+                <ScalarProperty Name="DEPARTMENT_NAME" ColumnName="DEPARTMENT_NAME" />
+                <ScalarProperty Name="TEACHER_ID" ColumnName="TEACHER_ID" />
+                <ScalarProperty Name="DEPARTMENT_OFFICE" ColumnName="DEPARTMENT_OFFICE" />
+                <ScalarProperty Name="DEPARTMENT_BUILDING" ColumnName="DEPARTMENT_BUILDING" />
+                <ScalarProperty Name="DEPARTMENT_PHONE" ColumnName="DEPARTMENT_PHONE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DISCIPLINES">
+            <EntityTypeMapping TypeName="AbdeevMarksStudentsModel.DISCIPLINES">
+              <MappingFragment StoreEntitySet="DISCIPLINES">
+                <ScalarProperty Name="DISCIPLINES_ID" ColumnName="DISCIPLINES_ID" />
+                <ScalarProperty Name="DEPARTMENT_ID" ColumnName="DEPARTMENT_ID" />
+                <ScalarProperty Name="DISCIPLINES_NAME" ColumnName="DISCIPLINES_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DISCIPLINES_TEACHERS">
+            <EntityTypeMapping TypeName="AbdeevMarksStudentsModel.DISCIPLINES_TEACHERS">
+              <MappingFragment StoreEntitySet="DISCIPLINES_TEACHERS">
+                <ScalarProperty Name="DISCIPLINES_TEACHER_ID" ColumnName="DISCIPLINES_TEACHER_ID" />
+                <ScalarProperty Name="DISCIPLINES_ID" ColumnName="DISCIPLINES_ID" />
+                <ScalarProperty Name="TEACHER_ID" ColumnName="TEACHER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACULTY">
+            <EntityTypeMapping TypeName="AbdeevMarksStudentsModel.FACULTY">
+              <MappingFragment StoreEntitySet="FACULTY">
+                <ScalarProperty Name="FACULTY_ID" ColumnName="FACULTY_ID" />
+                <ScalarProperty Name="FACULTY_NAME" ColumnName="FACULTY_NAME" />
+                <ScalarProperty Name="TEACHER_ID" ColumnName="TEACHER_ID" />
+                <ScalarProperty Name="FACULTY_OFFICE" ColumnName="FACULTY_OFFICE" />
+                <ScalarProperty Name="FACULTY_BUILDING" ColumnName="FACULTY_BUILDING" />
+                <ScalarProperty Name="FACULTY_PHONE" ColumnName="FACULTY_PHONE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GROUP">
+            <EntityTypeMapping TypeName="AbdeevMarksStudentsModel.GROUP">
+              <MappingFragment StoreEntitySet="GROUP">
+                <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+                <ScalarProperty Name="DEPARTMENT_ID" ColumnName="DEPARTMENT_ID" />
+                <ScalarProperty Name="GROUP_NAME" ColumnName="GROUP_NAME" />
+                <ScalarProperty Name="TEACHER_ID" ColumnName="TEACHER_ID" />
+                <ScalarProperty Name="GROUP_YEAR" ColumnName="GROUP_YEAR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATEMENT_MARKS">
+            <EntityTypeMapping TypeName="AbdeevMarksStudentsModel.STATEMENT_MARKS">
+              <MappingFragment StoreEntitySet="STATEMENT_MARKS">
+                <ScalarProperty Name="STATEMENT_MARKS_RECORD_ID" ColumnName="STATEMENT_MARKS_RECORD_ID" />
+                <ScalarProperty Name="STUDENT_ID" ColumnName="STUDENT_ID" />
+                <ScalarProperty Name="DISCIPLINES_TEACHER_ID" ColumnName="DISCIPLINES_TEACHER_ID" />
+                <ScalarProperty Name="STATEMENT_MARKS_MARK" ColumnName="STATEMENT_MARKS_MARK" />
+                <ScalarProperty Name="STATEMENT_MARKS_DATE" ColumnName="STATEMENT_MARKS_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATEMENT_SESSION">
+            <EntityTypeMapping TypeName="AbdeevMarksStudentsModel.STATEMENT_SESSION">
+              <MappingFragment StoreEntitySet="STATEMENT_SESSION">
+                <ScalarProperty Name="STATEMENT_SESSION_RECORD_ID" ColumnName="STATEMENT_SESSION_RECORD_ID" />
+                <ScalarProperty Name="STUDENT_ID" ColumnName="STUDENT_ID" />
+                <ScalarProperty Name="DISCIPLINES_TEACHER_ID" ColumnName="DISCIPLINES_TEACHER_ID" />
+                <ScalarProperty Name="STATEMENT_SESSION_SEMESTER" ColumnName="STATEMENT_SESSION_SEMESTER" />
+                <ScalarProperty Name="STATEMENT_SESSION_TYPE_TEST" ColumnName="STATEMENT_SESSION_TYPE_TEST" />
+                <ScalarProperty Name="STATEMENT_SESSION_MARK" ColumnName="STATEMENT_SESSION_MARK" />
+                <ScalarProperty Name="STATEMENT_SESSION_DATE" ColumnName="STATEMENT_SESSION_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STUDENTS">
+            <EntityTypeMapping TypeName="AbdeevMarksStudentsModel.STUDENTS">
+              <MappingFragment StoreEntitySet="STUDENTS">
+                <ScalarProperty Name="STUDENT_ID" ColumnName="STUDENT_ID" />
+                <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+                <ScalarProperty Name="STUDENT_SURNAME" ColumnName="STUDENT_SURNAME" />
+                <ScalarProperty Name="STUDENT_NAME" ColumnName="STUDENT_NAME" />
+                <ScalarProperty Name="STUDENT_PATRONYMIC" ColumnName="STUDENT_PATRONYMIC" />
+                <ScalarProperty Name="STUDENT_BIRTHDAY" ColumnName="STUDENT_BIRTHDAY" />
+                <ScalarProperty Name="STUDENT_GENDER" ColumnName="STUDENT_GENDER" />
+                <ScalarProperty Name="STUDENT_ADDRESS" ColumnName="STUDENT_ADDRESS" />
+                <ScalarProperty Name="STUDENT_PHONE" ColumnName="STUDENT_PHONE" />
+                <ScalarProperty Name="STUDENT_PHOTO" ColumnName="STUDENT_PHOTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEACHER">
+            <EntityTypeMapping TypeName="AbdeevMarksStudentsModel.TEACHER">
+              <MappingFragment StoreEntitySet="TEACHER">
+                <ScalarProperty Name="TEACHER_ID" ColumnName="TEACHER_ID" />
+                <ScalarProperty Name="TEACHER_SURNAME" ColumnName="TEACHER_SURNAME" />
+                <ScalarProperty Name="TEACHER_NAME" ColumnName="TEACHER_NAME" />
+                <ScalarProperty Name="TEACHER_PATRONYMIC" ColumnName="TEACHER_PATRONYMIC" />
+                <ScalarProperty Name="TEACHER_BIRTHDAY" ColumnName="TEACHER_BIRTHDAY" />
+                <ScalarProperty Name="TEACHER_GENDER" ColumnName="TEACHER_GENDER" />
+                <ScalarProperty Name="TEACHER_ADDRESS" ColumnName="TEACHER_ADDRESS" />
+                <ScalarProperty Name="TEACHER_PHONE" ColumnName="TEACHER_PHONE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
