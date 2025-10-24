@@ -65,15 +65,16 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200"></ColumnDefinition>
-                            <ColumnDefinition Width="450"></ColumnDefinition>
+                            <ColumnDefinition Width="650"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Grid.RowSpan="7" Stretch="UniformToFill" HorizontalAlignment="Center">
+                        <Image Grid.Column="0" Grid.RowSpan="8" Stretch="UniformToFill"  HorizontalAlignment="Center">
                             <Image.Source>
                                 <Binding Path="STUDENT_PHOTO_IMAGE">
                                     <Binding.TargetNullValue>
@@ -88,10 +89,15 @@
                         <TextBlock Text="{Binding STUDENT_ID, StringFormat=ID: {0}}" Grid.Row="0" Grid.Column="1"></TextBlock>
                         <TextBlock Text="{Binding FIO_STUDENT}" Grid.Row="1" Grid.Column="1"></TextBlock>
                         <TextBlock Text="{Binding GROUP_NAME, StringFormat=Группа: {0}}" Grid.Row="2" Grid.Column="1"></TextBlock>
-                        <TextBlock Text="{Binding STUDENT_BIRTHDAY, StringFormat=Дата рождения: {0:dd.MM.yyyy}}" Grid.Row="3" Grid.Column="1"></TextBlock>
-                        <TextBlock Text="{Binding STUDENT_GENDER, StringFormat=Пол: {0}}" Grid.Row="4" Grid.Column="1"></TextBlock>
+                        <TextBlock Text="{Binding STUDENT_BIRTHDAY, StringFormat=Дата рождения: {0:dd.MM.yyyy}}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{Binding STUDENT_GENDER, StringFormat=Пол: {0}}" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1"></TextBlock>
                         <TextBlock Text="{Binding STUDENT_ADDRESS, StringFormat=Адрес: {0}}" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap"></TextBlock>
                         <TextBlock Text="{Binding STUDENT_PHONE, StringFormat=Телефон: {0}}" Grid.Row="6" Grid.Column="1"></TextBlock>
+                        <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock Text="{Binding STUDENT_AVG_SESSION_MARK, StringFormat=Средний балл сессии: {0}}" ></TextBlock>
+                            <TextBlock Text=" | "></TextBlock>
+                            <TextBlock Text="{Binding STUDENT_AVG_MARK, StringFormat=Средний балл (общие оценки): {0}}" ></TextBlock>
+                        </StackPanel>
 
                         <Button Name="EditBtn" Click="EditBtn_Click" Content="Редактировать" Grid.Row="3" Grid.Column="2"></Button>
                         <Button Name="DeleteBtn" Click="DeleteBtn_Click"  Content="Удалить" Grid.Row="4" Grid.Column="2"></Button>

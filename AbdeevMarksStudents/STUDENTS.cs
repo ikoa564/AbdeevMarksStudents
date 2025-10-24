@@ -11,7 +11,8 @@ namespace AbdeevMarksStudents
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class STUDENTS
     {
         public STUDENTS()
@@ -65,7 +66,34 @@ namespace AbdeevMarksStudents
             }
         }
 
-        
+        public decimal STUDENT_AVG_SESSION_MARK
+        {
+            get
+            {
+                var context = AbdeevMarksStudentsEntities.GetContext();
+
+                var average = context.STATEMENT_SESSION
+                    .Where(ss => ss.STUDENT_ID == this.STUDENT_ID)
+                    .Average(ss => (decimal?)ss.STATEMENT_SESSION_MARK);
+
+                return Math.Round(average ?? 0, 2);
+            }
+        }
+
+        public decimal STUDENT_AVG_MARK
+        {
+            get
+            {
+                var context = AbdeevMarksStudentsEntities.GetContext();
+
+                var average = context.STATEMENT_MARKS.Where(ss => ss.STUDENT_ID == this.STUDENT_ID).Average(ss => (decimal?)ss.STATEMENT_MARKS_MARK);
+
+
+                return Math.Round(average ?? 0, 2);
+
+            }
+        }
+
 
         public virtual GROUP GROUP { get; set; }
         public virtual ICollection<STATEMENT_MARKS> STATEMENT_MARKS { get; set; }

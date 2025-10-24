@@ -22,46 +22,47 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
             <TextBlock Text="Идентификатор" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <TextBox Margin="5" Text="{Binding STUDENT_ID}" IsEnabled="False" Width="250" FontSize="20" Height="30"></TextBox>
+            <TextBox Margin="5" Text="{Binding STUDENT_ID}" IsEnabled="False" Width="70" FontSize="20" Height="30"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
             <TextBlock Text="Группа" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <ComboBox Name="GroupsComboBox" Margin="5" DisplayMemberPath="GROUP_NAME" SelectedValuePath="GROUP_ID" SelectedValue="{Binding GROUP_ID}" Width="250" FontSize="20" Height="30"></ComboBox>
+            <ComboBox Name="GroupsComboBox" Margin="5" DisplayMemberPath="GROUP_NAME" SelectedValuePath="GROUP_ID" SelectedValue="{Binding GROUP_ID}" Width="200" FontSize="20" Height="30"></ComboBox>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
             <TextBlock Text="Фамилия" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <TextBox Margin="5" Text="{Binding STUDENT_SURNAME}" Width="250" FontSize="20" Height="30"></TextBox>
+            <TextBox Margin="5" Text="{Binding STUDENT_SURNAME}" Width="200" FontSize="20" Height="30"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
             <TextBlock Text="Имя" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <TextBox Margin="5" Text="{Binding STUDENT_NAME}" Width="250" FontSize="20" Height="30"></TextBox>
+            <TextBox Margin="5" Text="{Binding STUDENT_NAME}" Width="200" FontSize="20" Height="30"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal">
             <TextBlock Text="Отчество" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <TextBox Margin="5" Text="{Binding STUDENT_PATRONYMIC}" Width="250" FontSize="20" Height="30"></TextBox>
+            <TextBox Margin="5" Text="{Binding STUDENT_PATRONYMIC}" Width="200" FontSize="20" Height="30"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal">
             <TextBlock Text="Дата рождения" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <DatePicker Margin="5" SelectedDate="{Binding STUDENT_BIRTHDAY}" Name="BirthdayDatePicker" FontSize="20" Height="40"></DatePicker>
+            <DatePicker Margin="5" SelectedDate="{Binding STUDENT_BIRTHDAY}" Name="BirthdayDatePicker" FontSize="20" Height="40" Width="150"></DatePicker>
         </StackPanel>
         <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal">
             <TextBlock Text="Пол" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
             <TextBox Margin="5" Text="{Binding STUDENT_GENDER}" Width="50" FontSize="20" Height="30"></TextBox>
         </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Grid.RowSpan="2">
             <TextBlock Text="Адрес" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
             <TextBox Margin="5" Text="{Binding STUDENT_ADDRESS}" Width="300" FontSize="20" Height="60" TextWrapping="Wrap"></TextBox>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
             <TextBlock Text="Телефон" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <TextBox Margin="5" Text="{Binding STUDENT_PHONE}" Width="250" FontSize="20" Height="30"></TextBox>
+            <TextBox Margin="5" Text="{Binding STUDENT_PHONE}" Width="200" FontSize="20" Height="30"></TextBox>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical" Grid.RowSpan="3">
+        <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Vertical" Grid.RowSpan="4">
             <TextBlock Text="Логотип" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <Image Name="LogoImage" Width="100" Height="100">
                 <Image.Source>
@@ -77,6 +78,54 @@
             <Button Content="Изменить" Name="ChangePictureBtn" Click="ChangePictureBtn_Click"></Button>
         </StackPanel>
 
-        <Button Grid.ColumnSpan="2" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Сохранить" Name="SaveBtn" Click="SaveBtn_Click"></Button>
+        <Button Grid.ColumnSpan="3" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Сохранить" Name="SaveBtn" Click="SaveBtn_Click"></Button>
+
+        <TextBlock Grid.Column="1" Grid.Row="3" FontSize="15" Text="Преподаватель | Предмет | Семестр | Тип зачета | Оценка | Дата оценки" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="2"></TextBlock>
+        <ListView Grid.Column="1" Grid.Row="4" Name="StatementSessionListView" HorizontalContentAlignment="Stretch"  Grid.ColumnSpan="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <!-- Преподаватель -->
+                            <ColumnDefinition Width="150"/>
+                            <!-- Дисциплина -->
+                            <ColumnDefinition Width="50"/>
+                            <!-- Семестр -->
+                            <ColumnDefinition Width="150"/>
+                            <!-- Тип -->
+                            <ColumnDefinition Width="50"/>
+                            <!-- Оценка -->
+                            <ColumnDefinition Width="90"/>
+                            <!-- Дата -->
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding TeacherFullNameWithInitials}" FontSize="15" Margin="4"/>
+                        <TextBlock Grid.Column="1" Text="{Binding DisciplineName}"  FontSize="15" Margin="4" />
+                        <TextBlock Grid.Column="2" Text="{Binding STATEMENT_SESSION_SEMESTER}" TextAlignment="Center" FontSize="15" Margin="4"></TextBlock>
+                        <TextBlock Grid.Column="3" Text="{Binding STATEMENT_SESSION_TYPE_TEST}" TextAlignment="Center" FontSize="15" Margin="4"></TextBlock>
+                        <TextBlock Grid.Column="4" Text="{Binding STATEMENT_SESSION_MARK}" FontSize="15" Margin="4" ></TextBlock>
+                        <TextBlock Grid.Column="5" Text="{Binding STATEMENT_SESSION_DATE, StringFormat={}{0:dd.MM.yyyy}}" FontSize="15" Margin="4" ></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Height="40" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <ComboBox IsTextSearchEnabled="True" IsEditable="True" Name="TeachersComboBox" 
+              HorizontalAlignment="Stretch" Margin="5" Width="250"/>
+            <TextBox Name="NumberSemesterTB" HorizontalAlignment="Stretch" Margin="5" Width="70"/>
+            <ComboBox IsTextSearchEnabled="True" IsEditable="True" Name="TypeTestComboBox" HorizontalAlignment="Stretch" Margin="5" Width="120"/>
+            <TextBox Name="SessionMarkTB" HorizontalAlignment="Stretch" Margin="5" Width="70"/>
+            <DatePicker Name="SessionMarkDate" HorizontalAlignment="Stretch" Margin="5" Width="150"/>
+        </StackPanel>
+
+
+
+        <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+            <Button Name="AddSessionMark" Content="Добавить" Click="AddSessionMark_Click"></Button>
+            <Button Name="DeleteSessionMark" Content="Удалить выделенные позиции" FontSize="18" Width="300" Click="DeleteSessionMark_Click"></Button>
+        </StackPanel>
+
+
     </Grid>
 </Page>

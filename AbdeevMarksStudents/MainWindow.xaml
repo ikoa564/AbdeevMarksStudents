@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AbdeevMarksStudents"
         mc:Ignorable="d"
-        Title="Успеваемость студентов ВУЗа" Height="550" Width="920" MinHeight="550" MinWidth="920" Icon="/res/uunt.jpg" FontFamily="Calibri" >
+        Title="Успеваемость студентов ВУЗа" Height="750" Width="1100" MinHeight="750" MinWidth="1100" Icon="/res/uunt.jpg" FontFamily="Calibri" >
     <Grid Background="#FF843D">
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>

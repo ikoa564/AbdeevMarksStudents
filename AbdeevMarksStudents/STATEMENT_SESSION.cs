@@ -21,7 +21,31 @@ namespace AbdeevMarksStudents
         public string STATEMENT_SESSION_TYPE_TEST { get; set; }
         public int STATEMENT_SESSION_MARK { get; set; }
         public System.DateTime STATEMENT_SESSION_DATE { get; set; }
-    
+
+        public string TeacherFullNameWithInitials
+        {
+            get
+            {
+                if (DISCIPLINES_TEACHERS?.TEACHER == null)
+                    return "—";
+
+                var t = DISCIPLINES_TEACHERS.TEACHER;
+                string nameInitial = t.TEACHER_NAME?.Length > 0 ? t.TEACHER_NAME[0].ToString() : "";
+                string patronymicInitial = t.TEACHER_PATRONYMIC?.Length > 0 ? t.TEACHER_PATRONYMIC[0].ToString() : "";
+
+                return $"{t.TEACHER_SURNAME} {nameInitial}.{patronymicInitial}.".Trim();
+            }
+        }
+
+        public string DisciplineName
+        {
+            get
+            {
+                return DISCIPLINES_TEACHERS?.DISCIPLINES?.DISCIPLINES_NAME ?? "—";
+            }
+        }
+
+
         public virtual DISCIPLINES_TEACHERS DISCIPLINES_TEACHERS { get; set; }
         public virtual STUDENTS STUDENTS { get; set; }
     }
