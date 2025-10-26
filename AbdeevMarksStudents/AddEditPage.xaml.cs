@@ -71,6 +71,12 @@ namespace AbdeevMarksStudents
             };
 
             TypeTestComboBox.ItemsSource = sessionTypes;
+
+            if (_currentStudent.STUDENT_ID == 0)
+            {
+                AddSessionMark.IsEnabled = false;
+                DeleteSessionMark.IsEnabled = false;
+            }
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
@@ -253,28 +259,33 @@ namespace AbdeevMarksStudents
 
         private void DeleteSessionMark_Click(object sender, RoutedEventArgs e)
         {
-            if (StatementSessionListView.SelectedItems.Count == 0)
+            if (MessageBox.Show("Вы точно хотите выполнить удаление?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                MessageBox.Show("Выберите записи для удаления.");
-                return;
-            }
+                if (StatementSessionListView.SelectedItems.Count == 0)
+                {
+                    MessageBox.Show("Выберите записи для удаления.");
+                    return;
+                }
 
-            var selectedItems = StatementSessionListView.SelectedItems.Cast<STATEMENT_SESSION>().ToList();
+                var selectedItems = StatementSessionListView.SelectedItems.Cast<STATEMENT_SESSION>().ToList();
 
-            try
-            {
-                foreach (var item in selectedItems)
-                    AbdeevMarksStudentsEntities.GetContext().STATEMENT_SESSION.Remove(item);
-                AbdeevMarksStudentsEntities.GetContext().SaveChanges();
+                try
+                {
+                    foreach (var item in selectedItems)
+                        AbdeevMarksStudentsEntities.GetContext().STATEMENT_SESSION.Remove(item);
+                    AbdeevMarksStudentsEntities.GetContext().SaveChanges();
 
-                RefreshSessionMarks();
-                MessageBox.Show("Выбранные записи удалены.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при удалении: {ex.Message}");
+                    RefreshSessionMarks();
+                    MessageBox.Show("Выбранные записи удалены.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при удалении: {ex.Message}");
+                }
+
             }
         }
+
 
         private void RefreshSessionMarks()
         {

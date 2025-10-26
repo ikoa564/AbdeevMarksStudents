@@ -99,8 +99,8 @@
                             <TextBlock Text="{Binding STUDENT_AVG_MARK, StringFormat=Средний балл (общие оценки): {0}}" ></TextBlock>
                         </StackPanel>
 
-                        <Button Name="EditBtn" Click="EditBtn_Click" Content="Редактировать" Grid.Row="3" Grid.Column="2"></Button>
-                        <Button Name="DeleteBtn" Click="DeleteBtn_Click"  Content="Удалить" Grid.Row="4" Grid.Column="2"></Button>
+                        <Button Name="EditBtn" Click="EditBtn_Click" Content="Редактировать" Grid.Row="2" Grid.RowSpan="2" Grid.Column="2"></Button>
+                        <Button Name="DeleteBtn" Click="DeleteBtn_Click"  Content="Удалить" Grid.Row="4" Grid.RowSpan="2" Grid.Column="2"></Button>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
